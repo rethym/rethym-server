@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+
+  <link rel="stylesheet" href="/web-assets/styles.css">
+
+  <script>
+    function changeSetupPage(to) {
+      const setupPages = document.getElementById("rethym-setup-page-wrapper").children;
+      for (var i = 0; i < setupPages.length; i++) {
+        setupPages[i].classList.add("d-none");
+      }
+
+      document.getElementById("rethym-setup-"+to).classList.remove("d-none");
+    }
+
+    window.onload = function () {
+      const theJSON = document.getElementById("configjson-div").innerText;
+      let newFormattedConfig = "";
+
+      const parsedJSON = JSON.parse(theJSON);
+
+      Object.entries(parsedJSON).forEach(([key, value]) => {
+        newFormattedConfig += `<p><b>${key}:</b> ${value}</p>`;
+      });
+
+      document.getElementById("configjson-div").innerHTML = `<div class="new-config-style mt-1">${newFormattedConfig}</div>`;
+    }
+
+    function finishSetupForm(f, newpage) {
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", f.dataset.action, true);
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.onload = function () {
+        if (xhr.status === 200) {
+          console.log(xhr.responseText);
+
+          if(xhr.responseText == '{"status":1}') {
+            changeSetupPage(newpage);
+          }
+        }
+      };
+      xhr.send(JSON.stringify(Object.fromEntries(new FormData(f))));
+    }
+  </script>
+</head>
+<body>
+  <div class="setup-topbar">
+    <div class="container">
+      <h1><%= title %></h1>
+    </div>
+  </div>
+
+  <form data-action="/api/setup" data-method="post" class="full-fixed-center" id="rethym-setup-page-wrapper">
+    <div id="rethym-setup-p1" class="rethym-setup-page">
+      <h2>Rethym Setup</h2>
+      <p class="mt-1">This page will setup the Rethym Server software.</p>
+      <p class="mt-1">Rethym is a powerful open-source music server with many features and extensive customizability.</p>
+      <p class="mt-1">Remember to complete all fields labeled as <span class="text-danger">* Required</span> or you will get an error.</p>
+      <p class="alert alert-danger mt-1">If Rethym is already setup, please disable this page in config.json.</p>
+      <div class="text-center">
+        <button type="button" class="btn-lg mt-2" onclick="changeSetupPage('p2');">Continue</button>
+      </div>
+    </div>
+
+    <div id="rethym-setup-p2" class="rethym-setup-page d-none">
+      <h2>Database</h2>
+      <p>Many settings (such as users, admin account) are set in this database.</p>
+      <p class="mt-1">Connect to a MySQL or MariaDB database below:</p>
+      <div>
+        <p class="mt-2 mb-1"><label for="mysqlHost">Host:<span class="text-danger">*</span></label></p>
+        <input type="text" id="mysqlHost" name="mysqlHost" value="localhost" required>
+      </div>
+      <div>
+        <p class="mt-2 mb-1"><label for="mysqlUser">Username:<span class="text-danger">*</span></label></p>
+        <input type="text" id="mysqlUser" name="mysqlUser" value="root" required>
+      </div>
+      <div>
+        <p class="mt-2 mb-1"><label for="mysqlPass">Password:</label></p>
+        <input type="password" id="mysqlPass" name="mysqlPass" placeholder="password">
+      </div>
+      <div>
+        <p class="mt-2 mb-1"><label for="mysqlDB">Database:<span class="text-danger">*</span></label></p>
+        <input type="text" id="mysqlDB" name="mysqlDB" value="rethym" required>
+        <p class="text-danger">This database should already exist and be empty!</p>
+      </div>
+      <div class="text-center">
+        <button type="button" class="btn-lg btn-secondary mt-2" onclick="changeSetupPage('p1');">Back</button>
+        <button type="button" class="btn-lg mt-2" onclick="changeSetupPage('p3');">Continue</button>
+      </div>
+    </div>
+
+    <div id="rethym-setup-p3" class="rethym-setup-page d-none">
+      <h2>Admin User</h2>
+      <p>Please create your account below.</p>
+      <div>
+        <p class="mt-2 mb-1"><label for="accUsername">Username:<span class="text-danger">*</span></label></p>
+        <input type="text" id="accUsername" name="accUsername" value="admin" required>
+      </div>
+      <div>
+        <p class="mt-2 mb-1"><label for="accPassword">Password:<span class="text-danger">*</span></label></p>
+        <input type="password" id="accPassword" name="accPassword" placeholder="password" required>
+      </div>
+      <div class="text-center">
+        <button type="button" class="btn-lg btn-secondary mt-2" onclick="changeSetupPage('p2');">Back</button>
+        <button type="button" class="btn-lg mt-2" onclick="changeSetupPage('p4');">Continue</button>
+      </div>
+    </div>
+
+    <div id="rethym-setup-p4" class="rethym-setup-page d-none">
+      <h2>Basic Configuration</h2>
+      <p>Please confirm that you would currently like these settings in your Rethym installation.</p>
+      <div id="configjson-div"><%= JSON.stringify(config) %></div>
+      <p class="text-danger mt-1">Remember to change <code>enable-setup-page</code> from <code>true</code> to <code>false</code>!</p>
+      <p>These settings can be changed in <code>./config/config.json</code>.</p>
+
+
+      <div class="text-center">
+        <button type="button" class="btn-lg btn-secondary mt-2" onclick="changeSetupPage('p3');">Back</button>
+        <button type="button" class="btn-lg mt-2" onclick="changeSetupPage('p5');">Continue</button>
+      </div>
+    </div>
+
+    <div id="rethym-setup-p5" class="rethym-setup-page d-none">
+      <h2>Success! <img src="https://cdn.jsdelivr.net/gh/mozilla/fxemoji/svgs/FirefoxEmoji/u1F389-partypopper.svg" style="vertical-align: middle;" width="26" height="26"></h2>
+      <p>Your settings have been changed successfully. <b>To save these changes, please click the "Save" button below.</b></p>
+
+
+      <div class="text-center">
+        <button type="button" class="btn-lg btn-secondary mt-2" onclick="changeSetupPage('p4')" id="lastBackBtn">Back</button>
+        <button type="button" class="btn-lg mt-2" onclick="finishSetupForm(this.parentNode.parentNode.parentNode, 'p6');">Continue</button>
+      </div>
+    </div>
+
+    <div id="rethym-setup-p6" class="rethym-setup-page d-none">
+      <h2>Success! <img src="https://cdn.jsdelivr.net/gh/mozilla/fxemoji/svgs/FirefoxEmoji/u1F389-partypopper.svg" style="vertical-align: middle;" width="26" height="26"></h2>
+      <p>You may now close this page.</p>
+      <hr>
+      </div>
+    </div>
+  </form>
+
+  <p style="position: fixed; bottom: 5px; left: 0; width: 100%; color: gray; text-align: center;">
+    <small>Emoji from <a href="https://github.com/mozilla/fxemoji" target="_blank" class="text-secondary">FxEmojis</a>, <a href="https://github.com/mozilla/fxemoji/blob/gh-pages/LICENSE.md" target="_blank" class="text-secondary">licensed under CC BY 4.0</a>.</small>
+    <br><small>This webpage will configure the <a href="https://github.com/rethym/rethym-server" target="_blank" class="text-secondary">Rethym Server</a> software and is <a href="https://github.com/rethym/rethym-server/blob/main/LICENSE" target="_blank" class="text-secondary">licensed under GNU GPL v3.0</a>.</small>
+  </p>
+</body>
+</html>

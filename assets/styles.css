@@ -1,0 +1,230 @@
+@import url(https://fonts.bunny.net/css?family=montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i);
+
+body {
+  font-family: "Montserrat";
+  padding: 0;
+  margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+}
+
+.setup-topbar {
+  background: rgba(0,0,0,0.05);
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.setup-topbar h1 {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.container {
+  margin-left: 15%;
+  margin-right: 15%;
+}
+
+.full-fixed-center {
+  width: 50%;
+  height: 50%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0,0,0,0.05);
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.rethym-setup-page {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+}
+
+.new-config-style {
+  padding: 5px;
+  border-radius: 3px;
+  background: rgba(0,0,0,0.05);
+}
+
+code {
+  color: #d63384;
+}
+
+.alert {
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-radius: 3px;
+}
+
+.alert-danger {
+  border: 1px solid #a61111;
+  background: #edcece;
+  color: rgba(0,0,0,0.75);
+}
+
+button {
+  background: #E20000;
+  color: #ffffff;
+  border-radius: 3px;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #960000;
+}
+
+.btn-lg {
+  padding: 7px;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 110%;
+}
+
+.btn-secondary {
+  background: #363636;
+}
+
+.btn-secondary:hover {
+  background: #242424;
+}
+
+label {
+  color: dimgray;
+}
+
+input[type="text"], input[type="password"] {
+  width: 100%;
+  border: none;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 5px;
+}
+
+.text-danger {
+  color: #a61111;
+}
+
+.text-light {
+  color: #f0f0f0;
+}
+
+.text-secondary {
+  color: #363636;
+}
+
+.d-flex { display: flex; }
+.d-inline-flex { display: inline-flex; }
+.d-grid { display: grid; }
+.d-inline-grid { display: inline-grid; }
+.d-block { display: block; }
+.d-inline { display: inline; }
+.d-inline-block { display: inline-block; }
+.d-table { display: table; }
+.d-table-row { display: table-row; }
+.d-table-cell { display: table-cell; }
+.d-list-item { display: list-item; }
+.d-none { display: none; }
+.d-contents { display: contents; }
+
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+
+.m-0 { margin: 0; }
+.m-1 { margin: 5px; }
+.m-2 { margin: 10px; }
+.m-3 { margin: 15px; }
+.m-4 { margin: 20px; }
+.m-5 { margin: 25px; }
+.m-6 { margin: 30px; }
+
+.mt-0 { margin-top: 0; }
+.mr-0 { margin-right: 0; }
+.mb-0 { margin-bottom: 0; }
+.ml-0 { margin-left: 0; }
+
+.mt-1 { margin-top: 5px; }
+.mr-1 { margin-right: 5px; }
+.mb-1 { margin-bottom: 5px; }
+.ml-1 { margin-left: 5px; }
+
+.mt-2 { margin-top: 10px; }
+.mr-2 { margin-right: 10px; }
+.mb-2 { margin-bottom: 10px; }
+.ml-2 { margin-left: 10px; }
+
+.mt-3 { margin-top: 15px; }
+.mr-3 { margin-right: 15px; }
+.mb-3 { margin-bottom: 15px; }
+.ml-3 { margin-left: 15px; }
+
+.mt-4 { margin-top: 20px; }
+.mr-4 { margin-right: 20px; }
+.mb-4 { margin-bottom: 20px; }
+.ml-4 { margin-left: 20px; }
+
+.mt-5 { margin-top: 25px; }
+.mr-5 { margin-right: 25px; }
+.mb-5 { margin-bottom: 25px; }
+.ml-5 { margin-left: 25px; }
+
+.mt-6 { margin-top: 30px; }
+.mr-6 { margin-right: 30px; }
+.mb-6 { margin-bottom: 30px; }
+.ml-6 { margin-left: 30px; }
+
+.p-0 { padding: 0; }
+.p-1 { padding: 5px; }
+.p-2 { padding: 10px; }
+.p-3 { padding: 15px; }
+.p-4 { padding: 20px; }
+.p-5 { padding: 25px; }
+.p-6 { padding: 30px; }
+
+.pt-0 { padding-top: 0; }
+.pr-0 { padding-right: 0; }
+.pb-0 { padding-bottom: 0; }
+.pl-0 { padding-left: 0; }
+
+.pt-1 { padding-top: 5px; }
+.pr-1 { padding-right: 5px; }
+.pb-1 { padding-bottom: 5px; }
+.pl-1 { padding-left: 5px; }
+
+.pt-2 { padding-top: 10px; }
+.pr-2 { padding-right: 10px; }
+.pb-2 { padding-bottom: 10px; }
+.pl-2 { padding-left: 10px; }
+
+.pt-3 { padding-top: 15px; }
+.pr-3 { padding-right: 15px; }
+.pb-3 { padding-bottom: 15px; }
+.pl-3 { padding-left: 15px; }
+
+.pt-4 { padding-top: 20px; }
+.pr-4 { padding-right: 20px; }
+.pb-4 { padding-bottom: 20px; }
+.pl-4 { padding-left: 20px; }
+
+.pt-5 { padding-top: 25px; }
+.pr-5 { padding-right: 25px; }
+.pb-5 { padding-bottom: 25px; }
+.pl-5 { padding-left: 25px; }
+
+.pt-6 { padding-top: 30px; }
+.pr-6 { padding-right: 30px; }
+.pb-6 { padding-bottom: 30px; }
+.pl-6 { padding-left: 30px; }

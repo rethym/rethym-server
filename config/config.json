@@ -1,0 +1,9 @@
+{
+    "config-version-do-not-change": "1.0.0",
+
+    "port": 25523,
+    "file-path": "/rethym",
+    "mysql-server-info": "./config/database.json",
+    "show-splash-image": true,
+    "enable-setup": true
+}
